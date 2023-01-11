@@ -1,0 +1,68 @@
+body {
+    background-color: #EEF9BF;
+}
+
+h1 {
+    color: #75B79E;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 66px;
+    letter-spacing: -0.004em;
+    margin-top: 40px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*CSS DA CARTA */
+
+.card {
+    width: 200px;
+    height: 250px;
+    position: relative;
+}
+
+.face {
+    width: 100%;
+    height: 100%;
+    background-color: #A7E9AF;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all .5s;
+    transform-style: preserve-3d;
+}
+
+.back-face {
+    transform: rotateY(180deg);
+}
+
+.card:hover .back-face {
+    transform: rotateY(0deg);
+}
+
+.card:hover .front-face {
+    transform: rotateY(-180deg);
+}
+
+/*FIM DO CSS DA CARTA */
+
+.container-cartas {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    margin-right: auto;
+    margin-left: auto;
+    width: fit-content;
+}
+
+img {
+    width: 180px;
+    height: auto;
+}
