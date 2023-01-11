@@ -1,5 +1,7 @@
 body {
     background-color: #EEF9BF;
+    display: flex;
+    flex-direction: column;
 }
 
 h1 {
@@ -14,6 +16,7 @@ h1 {
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
 }
 
 /*CSS DA CARTA */
@@ -22,6 +25,7 @@ h1 {
     width: 200px;
     height: 250px;
     position: relative;
+    margin-top: 50px;
 }
 
 .face {
@@ -56,10 +60,11 @@ h1 {
 .container-cartas {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 50px;
-    margin-right: auto;
+    justify-content: space-between;
+    margin-bottom: 50px;
     margin-left: auto;
-    width: fit-content;
+    margin-right: auto;
+    width: 80vw;
 }
 
 img {
