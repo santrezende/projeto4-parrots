@@ -1,23 +1,89 @@
-let numCarta = prompt("Com quantas cartas vc quer jogar?");
+let numCarta;
+function verificaCartas() {
 
-while (numCarta % 2 === 1 || numCarta < 3 || numCarta > 14) {
-    if (numCarta % 2 === 1 || numCarta < 3 || numCarta > 14) {
-        alert("INVALIDO");
-        numCarta = prompt("Com quantas cartas vc quer jogar?");
+    numCarta = prompt("Com quantas cartas vc quer jogar?");
+
+    while (numCarta % 2 === 1 || numCarta < 3 || numCarta > 14) {
+        if (numCarta % 2 === 1 || numCarta < 3 || numCarta > 14) {
+            alert("INVALIDO");
+            numCarta = prompt("Com quantas cartas vc quer jogar?");
+        }
+    }
+}
+//buscar a cartas no DOM
+
+const containerCartas = document.querySelector(".container-cartas");
+
+function comparador() {
+    return Math.random() - 0.5;
+}
+
+let cartasFront = [
+    "bobrossparrot",
+    "explodyparrot",
+    "fiestaparrot",
+    "metalparrot",
+    "revertitparrot",
+    "tripletsparrot",
+    "unicornparrot"
+];
+
+cartasFront.sort(comparador);
+
+const srcStringBack = "img/back.png";
+const srcStringFront = `img/${cartasFront}.gif`;
+
+function criarElementos(tag, classe) {
+    const elemento = document.createElement(tag);
+    elemento.className = classe;
+    return (elemento);
+}
+
+
+function criarCartas() {
+    containerCartas.innerHTML = "";
+    for (let indice = 0; indice < (numCarta / 2); indice++) {
+        const carta = criarElementos("li", "card");
+        const back = criarElementos("div", "back face");
+        const imgback = criarElementos("img", "img-back");
+        const front = criarElementos("div", "front face");
+        const imgfront = criarElementos("img", "img-front");
+
+        imgback.src = `img/back.png`;
+        imgfront.src = `img/${cartasFront[indice]}.gif`;
+
+        back.appendChild(imgback);
+        front.appendChild(imgfront);
+
+        carta.appendChild(back);
+        carta.appendChild(front);
+
+        containerCartas.appendChild(carta);
     }
 }
 
-//buscar a cartas no DOM
+function duplicarCartas() {
+    containerCartas.innerHTML = containerCartas.innerHTML + containerCartas.innerHTML;
+}
 
-const cartaUm = document.querySelector(".um");
-const cartaDois = document.querySelector(".dois");
-const cartaTres = document.querySelector(".tres");
-const cartaQuatro = document.querySelector(".quatro");
-const cartaCinco = document.querySelector(".cinco");
-const cartaSeis = document.querySelector(".seis");
-const cartaSete = document.querySelector(".sete");
+function colocaCartasEmbaralhadas() {
 
-const cartas = [];
-let ultimaPosicao = cartas[cartas.length];
+    const cartasEmJogo = document.querySelectorAll("li");
+    let embaralhado = Array.from(cartasEmJogo);
+    embaralhado.sort(comparador);
 
-console.log(cartaDois);
+    containerCartas.innerHTML = "";
+    for (let indice = 0; indice < numCarta; indice++) {
+        containerCartas.appendChild(embaralhado[indice]);
+    }
+
+}
+
+function iniciarJogo() {
+    verificaCartas();
+    criarCartas();
+    duplicarCartas();
+    colocaCartasEmbaralhadas()
+}
+
+iniciarJogo();

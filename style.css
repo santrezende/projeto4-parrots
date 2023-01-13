@@ -26,6 +26,7 @@ h1 {
     height: 250px;
     position: relative;
     margin-top: 50px;
+    margin-left: 30px;
 }
 
 .face {
@@ -43,15 +44,15 @@ h1 {
     transform-style: preserve-3d;
 }
 
-.back-face {
+.front {
     transform: rotateY(180deg);
 }
 
-.card:hover .back-face {
+.card:hover .front {
     transform: rotateY(0deg);
 }
 
-.card:hover .front-face {
+.card:hover .back {
     transform: rotateY(-180deg);
 }
 
@@ -60,7 +61,7 @@ h1 {
 .container-cartas {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     margin-bottom: 50px;
     margin-left: auto;
     margin-right: auto;
@@ -70,4 +71,8 @@ h1 {
 img {
     width: 180px;
     height: auto;
+}
+
+.escondido {
+    display: none;
 }
