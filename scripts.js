@@ -1,4 +1,5 @@
 let numCarta;
+
 function verificaCartas() {
 
     numCarta = prompt("Com quantas cartas vc quer jogar?");
@@ -10,7 +11,6 @@ function verificaCartas() {
         }
     }
 }
-//buscar a cartas no DOM
 
 const containerCartas = document.querySelector(".container-cartas");
 
@@ -49,6 +49,8 @@ function criarCartas() {
         const front = criarElementos("div", "front face");
         const imgfront = criarElementos("img", "img-front");
 
+        carta.setAttribute("onclick", "virarCarta(this)");
+
         imgback.src = `img/back.png`;
         imgfront.src = `img/${cartasFront[indice]}.gif`;
 
@@ -76,14 +78,26 @@ function colocaCartasEmbaralhadas() {
     for (let indice = 0; indice < numCarta; indice++) {
         containerCartas.appendChild(embaralhado[indice]);
     }
-
 }
 
 function iniciarJogo() {
     verificaCartas();
     criarCartas();
     duplicarCartas();
-    colocaCartasEmbaralhadas()
+    colocaCartasEmbaralhadas();
 }
 
 iniciarJogo();
+
+function virarCarta(card) {
+    const backVirada = card.querySelector(".back");
+    const frontVirada = card.querySelector(".front");
+
+    backVirada.setAttribute("class", "clicado back face");
+    frontVirada.setAttribute("class", "clicado front face");
+
+    //se ja tiver uma carta igual virada = manter as duas viradas pra cima
+
+    // se nao tiver, virar de volta a carta clicada e a carta clicada anteriormente
+}
+

@@ -48,12 +48,13 @@ h1 {
     transform: rotateY(180deg);
 }
 
-.card:hover .front {
-    transform: rotateY(0deg);
+
+.card .clicado.back {
+    transform: rotateY(-180deg);
 }
 
-.card:hover .back {
-    transform: rotateY(-180deg);
+.card .clicado.front {
+    transform: rotateY(0deg);
 }
 
 /*FIM DO CSS DA CARTA */
