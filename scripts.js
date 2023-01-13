@@ -50,9 +50,13 @@ function criarCartas() {
         const imgfront = criarElementos("img", "img-front");
 
         carta.setAttribute("onclick", "virarCarta(this)");
+        carta.setAttribute("data-imagem", `${cartasFront[indice]}`);
+        carta.setAttribute("data-test", "card");
 
         imgback.src = `img/back.png`;
+        imgback.setAttribute("data-test", "face-down-image");
         imgfront.src = `img/${cartasFront[indice]}.gif`;
+        imgfront.setAttribute("data-test", "face-up-image");
 
         back.appendChild(imgback);
         front.appendChild(imgfront);
@@ -89,15 +93,55 @@ function iniciarJogo() {
 
 iniciarJogo();
 
+let primeiraCarta = "";
+let segundaCarta = "";
+
+let pontos;
+let backVirada;
+let frontVirada;
+
+let aaa;
+let bbb;
+
 function virarCarta(card) {
-    const backVirada = card.querySelector(".back");
-    const frontVirada = card.querySelector(".front");
 
-    backVirada.setAttribute("class", "clicado back face");
-    frontVirada.setAttribute("class", "clicado front face");
+    backVirada = card.querySelector(".back");
+    frontVirada = card.querySelector(".front");
 
+    if (primeiraCarta === "") {
+        backVirada.setAttribute("class", "clicado back face");
+        frontVirada.setAttribute("class", "clicado front face");
+        primeiraCarta = card;
+    } else if (segundaCarta === "") {
+        backVirada.setAttribute("class", "clicado back face");
+        frontVirada.setAttribute("class", "clicado front face");
+        segundaCarta = card;
+
+        verificaIgualdade();
+    }
     //se ja tiver uma carta igual virada = manter as duas viradas pra cima
 
     // se nao tiver, virar de volta a carta clicada e a carta clicada anteriormente
 }
 
+function verificaIgualdade() {
+    const imagemPrimeira = primeiraCarta.getAttribute("data-imagem");
+    const imagemSegunda = segundaCarta.getAttribute("data-imagem");
+
+    const backPrimeiraCarta = primeiraCarta.querySelector(".back");
+    const frontPrimeiraCarta = primeiraCarta.querySelector(".front");
+
+    const backSegundaCarta = segundaCarta.querySelector(".back");
+    const frontSegundaCarta = segundaCarta.querySelector(".front");
+
+    if (imagemPrimeira === imagemSegunda) {
+        pontos++;
+        console.log(pontos);
+    } else {
+        //COLOCAR O SET TIMEOUT AQUI
+        backPrimeiraCarta.classList.remove("clicado");
+        backSegundaCarta.classList.remove("clicado");
+        frontPrimeiraCarta.classList.remove("clicado");
+        frontSegundaCarta.classList.remove("clicado");
+    }
+}
