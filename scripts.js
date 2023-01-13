@@ -1,13 +1,11 @@
-let numCarta;
+let numCarta = prompt("Com quantas cartas você quer jogar?");
 
 function verificaCartas() {
 
-    numCarta = prompt("Com quantas cartas vc quer jogar?");
-
     while (numCarta % 2 === 1 || numCarta < 3 || numCarta > 14) {
         if (numCarta % 2 === 1 || numCarta < 3 || numCarta > 14) {
-            alert("INVALIDO");
-            numCarta = prompt("Com quantas cartas vc quer jogar?");
+            alert("Digite um número par entre 4 e 14");
+            numCarta = prompt("Com quantas cartas você quer jogar?");
         }
     }
 }
@@ -91,17 +89,12 @@ function iniciarJogo() {
     colocaCartasEmbaralhadas();
 }
 
-iniciarJogo();
-
 let primeiraCarta = "";
 let segundaCarta = "";
 
-let pontos;
+let jogadas = 0;
 let backVirada;
 let frontVirada;
-
-let aaa;
-let bbb;
 
 function virarCarta(card) {
 
@@ -112,6 +105,7 @@ function virarCarta(card) {
         backVirada.setAttribute("class", "clicado back face");
         frontVirada.setAttribute("class", "clicado front face");
         primeiraCarta = card;
+        primeiraCarta.removeAttribute("onclick");
     } else if (segundaCarta === "") {
         backVirada.setAttribute("class", "clicado back face");
         frontVirada.setAttribute("class", "clicado front face");
@@ -119,9 +113,6 @@ function virarCarta(card) {
 
         verificaIgualdade();
     }
-    //se ja tiver uma carta igual virada = manter as duas viradas pra cima
-
-    // se nao tiver, virar de volta a carta clicada e a carta clicada anteriormente
 }
 
 function verificaIgualdade() {
@@ -135,13 +126,61 @@ function verificaIgualdade() {
     const frontSegundaCarta = segundaCarta.querySelector(".front");
 
     if (imagemPrimeira === imagemSegunda) {
-        pontos++;
-        console.log(pontos);
+        jogadas++;
+
+        segundaCarta.removeAttribute("onclick");
+
+        primeiraCarta.setAttribute("data-escolhida", "sim");
+        segundaCarta.setAttribute("data-escolhida", "sim");
+
+        primeiraCarta = "";
+        segundaCarta = "";
+
     } else {
-        //COLOCAR O SET TIMEOUT AQUI
-        backPrimeiraCarta.classList.remove("clicado");
-        backSegundaCarta.classList.remove("clicado");
-        frontPrimeiraCarta.classList.remove("clicado");
-        frontSegundaCarta.classList.remove("clicado");
+        setTimeout(() => {
+            jogadas++;
+            primeiraCarta.setAttribute("onclick", "virarCarta(this)");
+            backPrimeiraCarta.classList.remove("clicado");
+            backSegundaCarta.classList.remove("clicado");
+            frontPrimeiraCarta.classList.remove("clicado");
+            frontSegundaCarta.classList.remove("clicado");
+
+            primeiraCarta = "";
+            segundaCarta = "";
+        }, 500);
+    }
+    verificaFim();
+}
+
+let reiniciar = "";
+function verificaFim() {
+    const verificador = document.querySelectorAll("li");
+    const arrayVerificadora = Array.from(verificador);
+    let status = 0;
+    for (let indice = 0; indice < arrayVerificadora.length; indice++) {
+        let elementoArray = arrayVerificadora[indice];
+        if (elementoArray.getAttribute("data-escolhida") === "sim") {
+            status++;
+        }
+    }
+    if (status == numCarta) {
+        setTimeout(() => {
+            alert(`Você ganhou em ${jogadas * 2} jogadas!`);
+            reiniciar = prompt(`Você gostaria de reiniciar a partida?`);
+            status = 0;
+            jogadas = 0;
+            if (reiniciar === "sim") {
+                numCarta = prompt("Com quantas cartas você quer jogar?");
+                while (numCarta % 2 === 1 || numCarta < 3 || numCarta > 14) {
+                    if (numCarta % 2 === 1 || numCarta < 3 || numCarta > 14) {
+                        alert("Digite um número par entre 4 e 14");
+                        numCarta = prompt("Com quantas cartas você quer jogar?");
+                    }
+                }
+                iniciarJogo();
+            }
+        }, 500);
     }
 }
+
+iniciarJogo();
