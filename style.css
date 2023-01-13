@@ -4,6 +4,22 @@ body {
     flex-direction: column;
 }
 
+header {
+    display: flex;
+}
+
+.relogio {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+    letter-spacing: -0.004em;
+    color: #86BD8D;
+    position: absolute;
+    margin: 50px;
+}
+
 h1 {
     color: #75B79E;
     font-family: 'Roboto';
@@ -76,4 +92,18 @@ img {
 
 .escondido {
     display: none;
+}
+
+@media (max-width: 935px) {
+    .relogio {
+        display: none;
+    }
+
+    .container-cartas {
+        width: fit-content;
+        margin-left: 30px;
+        margin-right: 30px;
+        align-items: center;
+        justify-content: center;
+    }
 }

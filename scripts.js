@@ -82,13 +82,6 @@ function colocaCartasEmbaralhadas() {
     }
 }
 
-function iniciarJogo() {
-    verificaCartas();
-    criarCartas();
-    duplicarCartas();
-    colocaCartasEmbaralhadas();
-}
-
 let primeiraCarta = "";
 let segundaCarta = "";
 
@@ -165,10 +158,11 @@ function verificaFim() {
     }
     if (status == numCarta) {
         setTimeout(() => {
-            alert(`Você ganhou em ${jogadas * 2} jogadas!`);
+            alert(`Você ganhou com ${segundos} segundos, em ${jogadas * 2} jogadas!`);
             reiniciar = prompt(`Você gostaria de reiniciar a partida?`);
             status = 0;
             jogadas = 0;
+            segundos = 0;
             if (reiniciar === "sim") {
                 numCarta = prompt("Com quantas cartas você quer jogar?");
                 while (numCarta % 2 === 1 || numCarta < 3 || numCarta > 14) {
@@ -183,4 +177,26 @@ function verificaFim() {
     }
 }
 
+const relogio = document.querySelector(".relogio");
+
+let segundos = 0;
+let tempo = 1000;
+
+function printaRelogio() {
+    setInterval(() => { timer(); }, tempo);
+}
+
+function timer() {
+    segundos++;
+    relogio.innerHTML = segundos;
+}
+
+function iniciarJogo() {
+    verificaCartas();
+    criarCartas();
+    duplicarCartas();
+    colocaCartasEmbaralhadas();
+}
+
 iniciarJogo();
+printaRelogio();
