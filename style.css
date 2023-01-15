@@ -33,6 +33,7 @@ h1 {
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    margin-bottom: 50px;
 }
 
 /*CSS DA CARTA */
@@ -41,8 +42,6 @@ h1 {
     width: 200px;
     height: 250px;
     position: relative;
-    margin-top: 50px;
-    margin-left: 30px;
 }
 
 .face {
@@ -79,10 +78,12 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     margin-bottom: 50px;
     margin-left: auto;
     margin-right: auto;
-    width: 80vw;
+    width: 90vw;
+    gap: 2em;
 }
 
 img {
@@ -94,7 +95,13 @@ img {
     display: none;
 }
 
-@media (max-width: 935px) {
+@media (max-width: 800px) {
+    .relogio {
+        display: none;
+    }
+}
+
+@media (max-width: 545px) {
     .relogio {
         display: none;
     }
@@ -105,5 +112,16 @@ img {
         margin-right: 30px;
         align-items: center;
         justify-content: center;
+    }
+
+    .card {
+        width: 100px;
+        height: 125px;
+        position: relative;
+    }
+
+    img {
+        width: 90px;
+        height: auto;
     }
 }

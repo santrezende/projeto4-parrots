@@ -172,6 +172,9 @@ function verificaFim() {
                     }
                 }
                 iniciarJogo();
+            } else {
+                relogio.classList.add("escondido");
+                alert("O jogo acabou!");
             }
         }, 500);
     }
